@@ -1,0 +1,8 @@
+// src / routes / about / +page.ts;
+export const load = async ({ parent, data }) => {
+	console.log('page.ts');
+	return {
+		message: data.message,
+		another_message: data.another_message
+	};
+};
