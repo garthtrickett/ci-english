@@ -1,10 +1,20 @@
 import { treaty } from '@elysiajs/eden';
 import type { App } from './api/[...slugs]/+server';
-import type { Load } from '@sveltejs/kit';
+import type { PageLoad } from './$types';
+
+import { api } from '$lib/api';
 
 const client = treaty<App>('localhost:5173');
 
-export const load: Load = async () => {
+export const load: PageLoad = async (page, fetch) => {
+	const { queryClient } = await page.parent();
+
+	console.log('runs on both client and server');
+	await queryClient.prefetchQuery({
+		queryKey: ['posts', 10, fetch],
+		queryFn: () => api(fetch).getPosts(10)
+	});
+
 	const getAccount = async () => {
 		try {
 			// await new Promise((resolve) => setTimeout(resolve, 3000));

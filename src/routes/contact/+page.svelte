@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Task from '../../component/Task.svelte';
+	import Task from '../../lib/Task.svelte';
 
 	function getTasks() {
 		return [

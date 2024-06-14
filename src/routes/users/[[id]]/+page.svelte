@@ -2,7 +2,6 @@
 	import SuperDebug from 'sveltekit-superforms';
 
 	import type { PageData } from './$types.js';
-	import { page } from '$app/stores';
 	import { superForm } from 'sveltekit-superforms';
 
 	export let data: PageData;
@@ -13,7 +12,7 @@
 </script>
 
 {#if $message}
-	<h3 class:invalid={$page.status >= 400}>{$message}</h3>
+	<h3 class:invalid={globalThis.$page.status >= 400}>{$message}</h3>
 {/if}
 
 <h2>{!$form.id ? 'Create' : 'Update'} user</h2>
@@ -50,7 +49,4 @@
 </form>
 
 <style>
-	.invalid {
-		color: red;
-	}
 </style>

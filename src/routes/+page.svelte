@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { Button } from '$lib/components/ui/button/index.js';
 	import * as Card from '$lib/components//ui/card/index.js';
+	import Posts from '$lib/Posts.svelte';
+
 	const { data } = $props();
 </script>
 
@@ -22,16 +24,10 @@
 	TODO: can we skip page.ts and just have a page.server.ts and page.svelte that works good on intial
 	load and coming from another page
 	<br />TODO: compare eden mutation to page.server mutation
-</main>
 
-<Card.Root class="sm:col-span-2">
-	<Card.Header class="pb-3">
-		<Card.Title>Your Orders</Card.Title>
-		<Card.Description class="max-w-lg text-balance leading-relaxed">
-			Introducing Our Dynamic Orders Dashboard for Seamless Management and Insightful Analysis.
-		</Card.Description>
-	</Card.Header>
-	<Card.Footer>
-		<Button>Create New Order</Button>
-	</Card.Footer>
-</Card.Root>
+	<br />
+	<br />
+
+	<h1>Basic Query with SSR</h1>
+	<Posts />
+</main>

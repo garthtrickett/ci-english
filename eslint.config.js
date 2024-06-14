@@ -2,6 +2,9 @@ import js from '@eslint/js';
 import ts from 'typescript-eslint';
 import svelte from 'eslint-plugin-svelte';
 import prettier from 'eslint-config-prettier';
+import * as svelteQuery from '@tanstack/eslint-plugin-query'
+import drizzle from 'eslint-plugin-drizzle'
+
 import globals from 'globals';
 
 /** @type {import('eslint').Linter.FlatConfig[]} */
@@ -29,5 +32,22 @@ export default [
 	},
 	{
 		ignores: ['build/', '.svelte-kit/', 'dist/']
-	}
+	},
+	{
+		plugins: {
+			'@tanstack/query': svelteQuery,
+			drizzle,
+			},
+
+		rules: {
+			 ...drizzle.configs.recommended.rules,
+			 ...svelteQuery.configs.recommended.rules,
+		} 
+					
+
+
+
+		
+        
+	},
 ];
