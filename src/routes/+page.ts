@@ -9,7 +9,6 @@ const client = treaty<App>('localhost:5173');
 export const load: PageLoad = async (page, fetch) => {
 	const { queryClient } = await page.parent();
 
-	console.log('runs on both client and server');
 	await queryClient.prefetchQuery({
 		queryKey: ['posts', 10, fetch],
 		queryFn: () => api(fetch).getPosts(10)

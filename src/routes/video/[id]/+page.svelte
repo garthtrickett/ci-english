@@ -1,23 +1,33 @@
-<script>
+<script lang="ts">
+	import type { Post } from '$lib/models/types';
+	import { createQuery } from '@tanstack/svelte-query';
+	import { api } from '$lib/api';
+
 	const { data } = $props();
-	import { Button } from '$lib/components/ui/button';
-	import * as Card from '$lib/components/ui/card';
+
+	let postId: number = data.videoId;
+
+	const post = createQuery<Post>({
+		queryKey: ['post', postId, fetch],
+		queryFn: () => api().getPostById(postId)
+	});
 </script>
 
 <div>
-	<h1>Video {data.id}</h1>
-	<Button>Click me</Button>
-
-	<Card.Root>
-		<Card.Header>
-			<Card.Title>Card Title</Card.Title>
-			<Card.Description>Card Description</Card.Description>
-		</Card.Header>
-		<Card.Content>
-			<p>Card Content</p>
-		</Card.Content>
-		<Card.Footer>
-			<p>Card Footer</p>
-		</Card.Footer>
-	</Card.Root>
+	<div>
+		<a class="button" href="/"> Back </a>
+	</div>
+	{#if !postId || $post.isPending}
+		<span>Loading...</span>
+	{/if}
+	{#if $post.error}
+		<span>Error: {$post.error.message}</span>
+	{/if}
+	{#if $post.isSuccess}
+		<h1>{$post.data.title}</h1>
+		<div>
+			<p>{$post.data.body}</p>
+		</div>
+		<div>{$post.isFetching ? 'Background Updating...' : ' '}</div>
+	{/if}
 </div>
