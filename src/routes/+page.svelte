@@ -31,9 +31,9 @@
 	{:then accountStatus}
 		<h1>Status: {accountStatus}</h1>
 	{/await}
-	TODO: can we skip page.ts and just have a page.server.ts and page.svelte that works good on intial
-	load and coming from another page
-	<br />TODO: compare eden mutation to page.server mutation
+	<br />
+	TODO: Try out tanstack svelte query's mutation, infinite scroll and anything else interesting in the
+	docs
 
 	<br />
 	<br />

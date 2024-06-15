@@ -6,10 +6,10 @@ export const load: PageLoad = async ({ parent, fetch, params }) => {
 
 	const postId = parseInt(params.id);
 
-	await queryClient.prefetchQuery({
-		queryKey: ['post', postId, fetch],
-		queryFn: () => api(fetch).getPostById(postId)
-	});
+	// await queryClient.prefetchQuery({
+	// 	queryKey: ['post', postId, fetch],
+	// 	queryFn: () => api(fetch).getPostById(postId)
+	// });
 
-	return { videoId: postId };
+	return { videoId: postId, queryClient };
 };
